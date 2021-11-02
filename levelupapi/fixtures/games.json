@@ -1,0 +1,26 @@
+[
+    {
+        "model": "levelupapi.game",
+        "pk": 1,
+        "fields": {
+            "game_type": 2,
+            "title": "Caves and Chimeras",
+            "maker": "RP Games",
+            "gamer": 1,
+            "number_of_players": 4,
+            "skill_level": 2
+        }
+    },
+    {
+        "model": "levelupapi.game",
+        "pk": 2,
+        "fields": {
+            "game_type": 1,
+            "title": "Azul",
+            "maker": "Plan B Games",
+            "gamer": 1,
+            "number_of_players": 4,
+            "skill_level": 3
+        }
+    }
+]
