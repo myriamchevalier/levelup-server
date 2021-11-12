@@ -92,7 +92,7 @@ class EventView(ViewSet):
         # Do mostly the same thing as POST(create), but instead of
         # creating a new instance of Event, get the event record
         # from the database whose primary key is `pk`
-        event = Game.objects.get(pk=pk)
+        event = Event.objects.get(pk=pk)
         event.game = game
         event.description = request.data['description']
         event.date = request.data['date']

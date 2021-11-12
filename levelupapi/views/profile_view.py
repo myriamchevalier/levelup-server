@@ -15,7 +15,14 @@ def user_profile(request):
     gamer = Gamer.objects.get(user=request.auth.user)
 
     attending = Event.objects.filter(attendees = gamer)
+    # Can also be 
+    # attending = gamer.attending.all()
+    # because of the related_name we set on the Event model
+
     hosting = Event.objects.filter(organizer = gamer) 
+    # Can also be
+    # hosting = gamer.event_set
+    # When a user creates something, it creates a "_set" value on the user model.
 
     attending = EventSerializer(
         attending, many=True, context={'request': request})
