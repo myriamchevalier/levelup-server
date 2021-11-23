@@ -79,10 +79,41 @@ class EventTests(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
         # Assert that the values are correct
-
+        self.assertIsNotNone(response.data['id'])
         self.assertEqual(response.data['date'], event['date'])
         self.assertEqual(response.data['time'], event['time'])
         self.assertEqual(response.data['description'], event['description'])
         self.assertEqual(response.data['game']['id'],event['gameId'])
-        self.assertEqual(response.data['organizer']['user'], self.token.user_id)
+        self.assertEqual(response.data['organizer']['id'], 1)
 
+
+    def test_get_event(self):
+        """
+        Ensure we can GET an existing event
+        """
+
+        # Create new instance of Event
+        event = Event()
+        event.organizer_id = 1
+        event.date = "2021-12-20"
+        event.time = "11:00:00"
+        event.description = "Playing Azul"
+        event.game_id = 1
+
+        event.save()
+
+        url = f'/events/{event.id}'
+
+        response = self.client.get(url)
+
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+        self.assertEqual(response.data['date'], event.date)
+        self.assertEqual(response.data['time'], event.time)
+        self.assertEqual(response.data['description'], event.description)
+        self.assertEqual(response.data['organizer']['id'], event.organizer_id)
+        self.assertEqual(response.data['game']['id'], event.game_id)
+
+
+
+        
